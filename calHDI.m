@@ -17,7 +17,10 @@
 %
 %
 
-function HDIlim = calHDI(sampleVec, credMass=.95)
+function HDIlim = calHDI(sampleVec, credMass)
+    if nargin < 2
+        credMass=.95;
+    end;
     sortedPts = sort(sampleVec);
     ciIdxInc = floor(credMass*length(sortedPts));
     nCIs = length(sortedPts) - ciIdxInc;
@@ -29,4 +32,4 @@ function HDIlim = calHDI(sampleVec, credMass=.95)
     HDImin = sortedPts(minPos);
     HDImax = sortedPts(minPos+ciIdxInc);
     HDIlim = [HDImin HDImax];
-end;
+
